@@ -9,7 +9,7 @@ st.set_page_config(layout="wide")
 
 @st.cache_data
 def get_tesla_data():
-    df = pd.read_excel('https://www.kaggle.com/code/mytechnotalent/heart-attack-binary-classificaton?scriptVersionId=205810496&cellId=8')
+    df = pd.read_excel('https://www.kaggle.com/code/mytechnotalent/heart-attack-binary-classificaton?scriptVersionId=205810496&cellId=8.xlsx')
     df = df.drop(0)
     df['volume'] = df['volume'].astype(float)
     return df
