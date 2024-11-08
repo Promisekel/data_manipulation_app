@@ -9,7 +9,7 @@ st.set_page_config(layout="wide")
 
 @st.cache_data
 def get_tesla_data():
-    df = pd.read_csv('/kaggle/input/patients-data-for-medical-field/Patients Data ( Used for Heart Disease Prediction ).xlsx')
+    df = pd.read_csv('https://www.kaggle.com/code/mytechnotalent/heart-attack-binary-classificaton?scriptVersionId=205810496&cellId=8')
     df = df.drop(0)
     df['volume'] = df['volume'].astype(float)
     return df
