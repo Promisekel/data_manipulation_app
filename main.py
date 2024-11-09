@@ -44,7 +44,7 @@ with col2:
         st.write("### Age Distribution")
         fig, ax = plt.subplots()
         sns.histplot(data['age'], kde=True, bins=20, ax=ax)
-        ax.set_xlabel('Age')
+        ax.set_xlabel('agegrp')
         ax.set_ylabel('Frequency')
         st.pyplot(fig)
     else:
@@ -55,7 +55,7 @@ with col3:
     if 'alo' in data.columns and 'some_numeric_column' in data.columns:
         st.write("### Boxplot of Numeric Column by 'alo' Category")
         fig, ax = plt.subplots()
-        sns.boxplot(x='alo', y='some_numeric_column', data=data, ax=ax)
+        sns.boxplot(x='bmi2', y='some_numeric_column', data=data, ax=ax)
         ax.set_xlabel('alo')
         ax.set_ylabel('Some Numeric Column')
         st.pyplot(fig)
@@ -68,7 +68,7 @@ with col4:
     if 'numeric_column_1' in data.columns and 'numeric_column_2' in data.columns:
         st.write("### Scatter Plot of Two Numeric Columns")
         fig, ax = plt.subplots()
-        sns.scatterplot(x='numeric_column_1', y='numeric_column_2', data=data, ax=ax)
+        sns.scatterplot(x='height', y='weight', data=data, ax=ax)
         ax.set_xlabel('Numeric Column 1')
         ax.set_ylabel('Numeric Column 2')
         st.pyplot(fig)
