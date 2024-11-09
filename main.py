@@ -49,7 +49,7 @@ with col2:
         st.pyplot(fig)
     else:
         st.write("Column 'age' not found in the dataset.")
-
+col3, col4 = st.columns(2)
 # Visualization 3: Boxplot of a Numeric Column by Category in 'alo'
 with col3:
     if 'alo' in data.columns and 'some_numeric_column' in data.columns:
@@ -63,7 +63,7 @@ with col3:
         st.write("Required columns not found in the dataset.")
 
 # Visualization 4: Scatter Plot (if there are two numeric columns)
-col4, col5, col6 = st.columns(3)
+
 with col4:
     if 'height' in data.columns and 'weight' in data.columns:
         st.write("### Scatter Plot of Two Numeric Columns")
@@ -74,20 +74,9 @@ with col4:
         st.pyplot(fig)
     else:
         st.write("Numeric columns not found in the dataset.")
-
-# Visualization 5: Heatmap of Correlation Matrix
-with col5:
-    st.write("### Correlation Heatmap")
-    numeric_data = data.select_dtypes(include=['float64', 'int64'])
-    if not numeric_data.empty:
-        fig, ax = plt.subplots()
-        sns.heatmap(numeric_data.corr(), annot=True, cmap='coolwarm', ax=ax)
-        st.pyplot(fig)
-    else:
-        st.write("No numeric columns available for correlation heatmap.")
-
+ col5 = st.columns(1)
 # Visualization 6: Pie Chart of 'alo' Distribution
-with col6:
+with col5:
     if 'alo' in data.columns:
         st.write("### 'alo' Category Distribution - Pie Chart")
         fig, ax = plt.subplots()
