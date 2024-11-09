@@ -12,7 +12,7 @@ st.set_page_config(layout="wide")
 # Load dataset
 @st.cache_data
 def load_data():
-    df = pd.read_excel('/mnt/data/CLAARITY_with_alo_AF_.xlsx')
+    df = pd.read_excel('data/CLAARITY_with_alo_AF_.xlsx')
     return df
 
 # Load and display the dataset
