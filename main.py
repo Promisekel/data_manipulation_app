@@ -55,7 +55,7 @@ with col3:
     if 'alo' in data.columns and 'some_numeric_column' in data.columns:
         st.write("### Boxplot of Numeric Column by 'alo' Category")
         fig, ax = plt.subplots()
-        sns.boxplot(x='bmi2', y='some_numeric_column', data=data, ax=ax)
+        sns.boxplot(x='bmi2', y='alo', data=data, ax=ax)
         ax.set_xlabel('bmi2')
         ax.set_ylabel('Some Numeric Column')
         st.pyplot(fig)
