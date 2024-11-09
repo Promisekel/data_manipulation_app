@@ -1,55 +1,117 @@
 from datetime import datetime, timedelta
-
 import pandas as pd
 import streamlit as st
 from mitosheet.streamlit.v1 import spreadsheet
 from mitosheet.streamlit.v1.spreadsheet import _get_mito_backend
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+# Set page configuration
 st.set_page_config(layout="wide")
 
+# Load dataset
 @st.cache_data
-def get_tesla_data():
-    df = pd.read_excel('data/CLAARITY_with_alo_AF_.xlsx')
-    #df = df.drop(0)
-   # df['volume'] = df['volume'].astype(float)
+def load_data():
+    df = pd.read_excel('/mnt/data/CLAARITY_with_alo_AF_.xlsx')
     return df
 
-tesla_data = get_tesla_data()
+# Load and display the dataset
+data = load_data()
 
-new_dfs, code = spreadsheet(tesla_data)
-code = code if code else "# Edit the spreadsheet above to generate code"
-st.code(code)
+# Display basic info about the data
+st.write("### Dataset Overview")
+st.write(data.head())
 
-# Check if 'alo' column exists and create a bar chart
-if 'alo' in tesla_data.columns:
-    # Count the occurrences of each unique category in the 'alo' column
-    alo_counts = tesla_data['alo'].value_counts()
+# Arrange visualizations in a 3-column layout
+col1, col2, col3 = st.columns(3)
 
-    # Display the bar chart
-    st.bar_chart(alo_counts)
-else:
-    st.write("Column 'alo' not found in the DataFrame.")
+# Visualization 1: Bar chart of 'alo' counts (Categorical Distribution)
+with col1:
+    if 'alo' in data.columns:
+        st.write("### Distribution of 'alo'")
+        alo_counts = data['alo'].value_counts()
+        fig, ax = plt.subplots()
+        sns.barplot(x=alo_counts.index, y=alo_counts.values, ax=ax)
+        ax.set_xlabel('alo Categories')
+        ax.set_ylabel('Count')
+        st.pyplot(fig)
+    else:
+        st.write("Column 'alo' not found in the dataset.")
 
+# Visualization 2: Histogram of a Numeric Column (e.g., Age, if it exists)
+with col2:
+    if 'age' in data.columns:
+        st.write("### Age Distribution")
+        fig, ax = plt.subplots()
+        sns.histplot(data['age'], kde=True, bins=20, ax=ax)
+        ax.set_xlabel('Age')
+        ax.set_ylabel('Frequency')
+        st.pyplot(fig)
+    else:
+        st.write("Column 'age' not found in the dataset.")
+
+# Visualization 3: Boxplot of a Numeric Column by Category in 'alo'
+with col3:
+    if 'alo' in data.columns and 'some_numeric_column' in data.columns:
+        st.write("### Boxplot of Numeric Column by 'alo' Category")
+        fig, ax = plt.subplots()
+        sns.boxplot(x='alo', y='some_numeric_column', data=data, ax=ax)
+        ax.set_xlabel('alo')
+        ax.set_ylabel('Some Numeric Column')
+        st.pyplot(fig)
+    else:
+        st.write("Required columns not found in the dataset.")
+
+# Visualization 4: Scatter Plot (if there are two numeric columns)
+col4, col5, col6 = st.columns(3)
+with col4:
+    if 'numeric_column_1' in data.columns and 'numeric_column_2' in data.columns:
+        st.write("### Scatter Plot of Two Numeric Columns")
+        fig, ax = plt.subplots()
+        sns.scatterplot(x='numeric_column_1', y='numeric_column_2', data=data, ax=ax)
+        ax.set_xlabel('Numeric Column 1')
+        ax.set_ylabel('Numeric Column 2')
+        st.pyplot(fig)
+    else:
+        st.write("Numeric columns not found in the dataset.")
+
+# Visualization 5: Heatmap of Correlation Matrix
+with col5:
+    st.write("### Correlation Heatmap")
+    numeric_data = data.select_dtypes(include=['float64', 'int64'])
+    if not numeric_data.empty:
+        fig, ax = plt.subplots()
+        sns.heatmap(numeric_data.corr(), annot=True, cmap='coolwarm', ax=ax)
+        st.pyplot(fig)
+    else:
+        st.write("No numeric columns available for correlation heatmap.")
+
+# Visualization 6: Pie Chart of 'alo' Distribution
+with col6:
+    if 'alo' in data.columns:
+        st.write("### 'alo' Category Distribution - Pie Chart")
+        fig, ax = plt.subplots()
+        data['alo'].value_counts().plot.pie(autopct='%1.1f%%', startangle=90, ax=ax)
+        ax.set_ylabel('')
+        st.pyplot(fig)
+    else:
+        st.write("Column 'alo' not found in the dataset.")
+
+# Add code display and cache-clearing function
 def clear_mito_backend_cache():
     _get_mito_backend.clear()
 
-# Function to cache the last execution time - so we can clear periodically
 @st.cache_resource
 def get_cached_time():
-    # Initialize with a dictionary to store the last execution time
     return {"last_executed_time": None}
 
 def try_clear_cache():
-
-    # How often to clear the cache
     CLEAR_DELTA = timedelta(hours=12)
-
     current_time = datetime.now()
     cached_time = get_cached_time()
-
-    # Check if the current time is different from the cached last execution time
     if cached_time["last_executed_time"] is None or cached_time["last_executed_time"] + CLEAR_DELTA < current_time:
         clear_mito_backend_cache()
         cached_time["last_executed_time"] = current_time
 
 try_clear_cache()
+
