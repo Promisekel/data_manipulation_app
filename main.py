@@ -40,7 +40,7 @@ with col1:
 
 # Visualization 2: Histogram of a Numeric Column (e.g., Age, if it exists)
 with col2:
-    if 'age' in data.columns:
+    if 'agegrp' in data.columns:
         st.write("### Age Distribution")
         fig, ax = plt.subplots()
         sns.histplot(data['agegrp'], kde=True, bins=20, ax=ax)
