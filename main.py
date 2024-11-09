@@ -21,7 +21,7 @@ code = code if code else "# Edit the spreadsheet above to generate code"
 st.code(code)
 
 if 'alo' in df.columns:
-    st.line_chart(df['alo'])
+    st.line_chart(tesla_data['alo'])
 else:
     st.write("Column 'alo' not found in the DataFrame.")
 
