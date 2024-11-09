@@ -20,7 +20,10 @@ new_dfs, code = spreadsheet(tesla_data)
 code = code if code else "# Edit the spreadsheet above to generate code"
 st.code(code)
 
-st.line_chart(df['alo'])
+if 'alo' in df.columns:
+    st.line_chart(df['alo'])
+else:
+    st.write("Column 'alo' not found in the DataFrame.")
 
 def clear_mito_backend_cache():
     _get_mito_backend.clear()
