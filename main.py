@@ -20,7 +20,7 @@ new_dfs, code = spreadsheet(tesla_data)
 code = code if code else "# Edit the spreadsheet above to generate code"
 st.code(code)
 
-if 'alo' in df.columns:
+if 'alo' in tesla_data.columns:
     st.line_chart(tesla_data['alo'])
 else:
     st.write("Column 'alo' not found in the DataFrame.")
