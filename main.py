@@ -52,12 +52,12 @@ with col2:
 col3, col4, col5 = st.columns(3)
 # Visualization 3: Boxplot of a Numeric Column by Category in 'alo'
 with col3:
-    if 'alo' in data.columns and 'some_numeric_column' in data.columns:
+    if 'alo' in data.columns and 'bmi2' in data.columns:
         st.write("## Boxplot of Numeric Column by 'alo' Category")
         fig, ax = plt.subplots()
         sns.boxplot(x='alo', y='bmi2', data=data, ax=ax)
-        ax.set_xlabel('bmi2')
-        ax.set_ylabel('Some Numeric Column')
+        ax.set_xlabel('alo')
+        ax.set_ylabel('bmi2')
         st.pyplot(fig)
     else:
         st.write("Required columns not found in the dataset.")
