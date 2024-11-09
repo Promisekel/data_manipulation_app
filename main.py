@@ -74,7 +74,6 @@ with col4:
         st.pyplot(fig)
     else:
         st.write("Numeric columns not found in the dataset.")
- col5 = st.columns(1)
 # Visualization 6: Pie Chart of 'alo' Distribution
 with col5:
     if 'alo' in data.columns:
