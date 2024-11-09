@@ -28,7 +28,7 @@ col1, col2= st.columns(2)
 # Visualization 1: Bar chart of 'alo' counts (Categorical Distribution)
 with col1:
     if 'alo' in data.columns:
-        st.write("### Distribution of 'alo'")
+        st.write("## Distribution of 'alo'")
         alo_counts = data['alo'].value_counts()
         fig, ax = plt.subplots()
         sns.barplot(x=alo_counts.index, y=alo_counts.values, ax=ax)
@@ -41,7 +41,7 @@ with col1:
 # Visualization 2: Histogram of a Numeric Column (e.g., Age, if it exists)
 with col2:
     if 'agegrp' in data.columns:
-        st.write("### Age Distribution")
+        st.write("## Age Distribution")
         fig, ax = plt.subplots()
         sns.histplot(data['agegrp'], kde=True, bins=20, ax=ax)
         ax.set_xlabel('agegrp')
@@ -53,9 +53,9 @@ col3, col4, col5 = st.columns(3)
 # Visualization 3: Boxplot of a Numeric Column by Category in 'alo'
 with col3:
     if 'alo' in data.columns and 'some_numeric_column' in data.columns:
-        st.write("### Boxplot of Numeric Column by 'alo' Category")
+        st.write("## Boxplot of Numeric Column by 'alo' Category")
         fig, ax = plt.subplots()
-        sns.boxplot(x='bmi2', y='alo', data=data, ax=ax)
+        sns.boxplot(x='alo', y='bmi2', data=data, ax=ax)
         ax.set_xlabel('bmi2')
         ax.set_ylabel('Some Numeric Column')
         st.pyplot(fig)
