@@ -23,7 +23,7 @@ st.write("### Dataset Overview")
 st.write(data.head())
 
 # Arrange visualizations in a 3-column layout
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 = st.columns(2)
 
 # Visualization 1: Bar chart of 'alo' counts (Categorical Distribution)
 with col1:
