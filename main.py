@@ -43,7 +43,7 @@ with col2:
     if 'age' in data.columns:
         st.write("### Age Distribution")
         fig, ax = plt.subplots()
-        sns.histplot(data['age'], kde=True, bins=20, ax=ax)
+        sns.histplot(data['agegrp'], kde=True, bins=20, ax=ax)
         ax.set_xlabel('agegrp')
         ax.set_ylabel('Frequency')
         st.pyplot(fig)
@@ -56,7 +56,7 @@ with col3:
         st.write("### Boxplot of Numeric Column by 'alo' Category")
         fig, ax = plt.subplots()
         sns.boxplot(x='bmi2', y='some_numeric_column', data=data, ax=ax)
-        ax.set_xlabel('alo')
+        ax.set_xlabel('bmi2')
         ax.set_ylabel('Some Numeric Column')
         st.pyplot(fig)
     else:
@@ -65,12 +65,12 @@ with col3:
 # Visualization 4: Scatter Plot (if there are two numeric columns)
 col4, col5, col6 = st.columns(3)
 with col4:
-    if 'numeric_column_1' in data.columns and 'numeric_column_2' in data.columns:
+    if 'height' in data.columns and 'weight' in data.columns:
         st.write("### Scatter Plot of Two Numeric Columns")
         fig, ax = plt.subplots()
         sns.scatterplot(x='height', y='weight', data=data, ax=ax)
-        ax.set_xlabel('Numeric Column 1')
-        ax.set_ylabel('Numeric Column 2')
+        ax.set_xlabel('height')
+        ax.set_ylabel('weight')
         st.pyplot(fig)
     else:
         st.write("Numeric columns not found in the dataset.")
