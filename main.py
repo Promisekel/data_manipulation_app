@@ -49,7 +49,7 @@ with col2:
         st.pyplot(fig)
     else:
         st.write("Column 'age' not found in the dataset.")
-col3, col4 = st.columns(2)
+col3, col4, col5 = st.columns(3)
 # Visualization 3: Boxplot of a Numeric Column by Category in 'alo'
 with col3:
     if 'alo' in data.columns and 'some_numeric_column' in data.columns:
