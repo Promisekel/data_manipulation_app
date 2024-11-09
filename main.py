@@ -20,8 +20,13 @@ new_dfs, code = spreadsheet(tesla_data)
 code = code if code else "# Edit the spreadsheet above to generate code"
 st.code(code)
 
+# Check if 'alo' column exists and create a bar chart
 if 'alo' in tesla_data.columns:
-    st.bar_chart(tesla_data['alo'])
+    # Count the occurrences of each unique category in the 'alo' column
+    alo_counts = tesla_data['alo'].value_counts()
+
+    # Display the bar chart
+    st.bar_chart(alo_counts)
 else:
     st.write("Column 'alo' not found in the DataFrame.")
 
