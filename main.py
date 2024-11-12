@@ -27,16 +27,16 @@ col1, col2= st.columns(2)
 
 # Visualization 1: 
 with col1:
+    with col5:
     if 'alo' in data.columns:
-        st.write("### Distribution of Allocation")
-        alo_counts = data['alo'].value_counts()
+        st.write("### 'Pie Chart of allocation")
         fig, ax = plt.subplots()
-        sns.barplot(x=alo_counts.index, y=alo_counts.values, ax=ax)
-        ax.set_xlabel('alo Categories')
-        ax.set_ylabel('Count')
+        data['alo'].value_counts().plot.pie(autopct='%1.1f%%', startangle=90, ax=ax)
+        ax.set_ylabel('')
         st.pyplot(fig)
     else:
-        st.write("Allocation not found in the dataset.")
+        st.write("Column 'alo' not found in the dataset.")
+  
 
 # Visualization 2: 
 with col2:
@@ -76,15 +76,16 @@ with col4:
         st.write("Numeric columns not found in the dataset.")
 # Visualization 6: Pie Chart of 'alo' Distribution
 col5, col6 = st.columns(2)
-with col5:
-    if 'alo' in data.columns:
-        st.write("### 'Pie Chart of allocation")
+  if 'alo' in data.columns:
+        st.write("### Distribution of Allocation")
+        alo_counts = data['alo'].value_counts()
         fig, ax = plt.subplots()
-        data['alo'].value_counts().plot.pie(autopct='%1.1f%%', startangle=90, ax=ax)
-        ax.set_ylabel('')
+        sns.barplot(x=alo_counts.index, y=alo_counts.values, ax=ax)
+        ax.set_xlabel('alo Categories')
+        ax.set_ylabel('Count')
         st.pyplot(fig)
     else:
-        st.write("Column 'alo' not found in the dataset.")
+        st.write("Allocation not found in the dataset.")
 
 # Add code display and cache-clearing function
 def clear_mito_backend_cache():
