@@ -3,4 +3,4 @@ mitosheet
 pandas
 matplotlib
 seaborn
- 
+janitor
