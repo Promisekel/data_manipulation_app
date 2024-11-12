@@ -5,8 +5,6 @@ from mitosheet.streamlit.v1 import spreadsheet
 from mitosheet.streamlit.v1.spreadsheet import _get_mito_backend
 import matplotlib.pyplot as plt
 import seaborn as sns
-import rpy2.robjects as robjects
-
 
 # Set page configuration
 st.set_page_config(layout="wide")
@@ -88,19 +86,6 @@ with col5:
         st.pyplot(fig)
     else:
         st.write("Column 'alo' not found in the dataset.")
-
-
-robjects.r('''
-    rst_crp <- folowup %>%
-        filter(!is.na(h_crp_done_d)) %>%
-        tabyl(h_crp_done_d, f_visit_d) %>%
-        adorn_totals("row") %>%
-        adorn_percentages("all") %>%
-        adorn_pct_formatting(digits = 2) %>%
-        adorn_ns()
-        as.data.frame(rst_crp)
-''')
-
 
 # Add code display and cache-clearing function
 def clear_mito_backend_cache():
