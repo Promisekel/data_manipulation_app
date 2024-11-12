@@ -25,10 +25,10 @@ st.write(data.head())
 # Arrange visualizations in a 3-column layout
 col1, col2= st.columns(2)
 
-# Visualization 1: Bar chart of 'alo' counts (Categorical Distribution)
+# Visualization 1: 
 with col1:
     if 'alo' in data.columns:
-        st.write("### Distribution of 'alo'")
+        st.write("### Distribution of Allocation")
         alo_counts = data['alo'].value_counts()
         fig, ax = plt.subplots()
         sns.barplot(x=alo_counts.index, y=alo_counts.values, ax=ax)
@@ -36,9 +36,9 @@ with col1:
         ax.set_ylabel('Count')
         st.pyplot(fig)
     else:
-        st.write("Column 'alo' not found in the dataset.")
+        st.write("Allocation not found in the dataset.")
 
-# Visualization 2: Histogram of a Numeric Column (e.g., Age, if it exists)
+# Visualization 2: 
 with col2:
     if 'agegrp' in data.columns:
         st.write("### Age Distribution")
@@ -48,12 +48,12 @@ with col2:
         ax.set_ylabel('Frequency')
         st.pyplot(fig)
     else:
-        st.write("Column 'age' not found in the dataset.")
+        st.write("age not found in the dataset.")
 col3, col4 = st.columns(2)
-# Visualization 3: Boxplot of a Numeric Column by Category in 'alo'
+# Visualization 3: Boxplot 
 with col3:
     if 'alo' in data.columns and 'bmi2' in data.columns:
-        st.write("### Boxplot of Numeric Column by 'alo' Category")
+        st.write("### Boxplot of BMI by allocation Category")
         fig, ax = plt.subplots()
         sns.boxplot(x='alo', y='bmi2', data=data, ax=ax)
         ax.set_xlabel('alo')
@@ -62,11 +62,11 @@ with col3:
     else:
         st.write("Required columns not found in the dataset.")
 
-# Visualization 4: Scatter Plot (if there are two numeric columns)
+# Visualization 4: Scatter Plot 
 
 with col4:
     if 'height' in data.columns and 'weight' in data.columns:
-        st.write("### Scatter Plot of Two Numeric Columns")
+        st.write("### Scatter Plot of height and weight")
         fig, ax = plt.subplots()
         sns.scatterplot(x='height', y='weight', data=data, ax=ax)
         ax.set_xlabel('height')
@@ -78,7 +78,7 @@ with col4:
 col5, col6 = st.columns(2)
 with col5:
     if 'alo' in data.columns:
-        st.write("### 'alo' Category Distribution - Pie Chart")
+        st.write("### 'Pie Chart of allocation")
         fig, ax = plt.subplots()
         data['alo'].value_counts().plot.pie(autopct='%1.1f%%', startangle=90, ax=ax)
         ax.set_ylabel('')
