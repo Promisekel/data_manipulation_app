@@ -1,1 +1,1 @@
-# mito-for-streamlit-demo
+# CLAARITY
