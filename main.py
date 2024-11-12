@@ -27,7 +27,6 @@ col1, col2= st.columns(2)
 
 # Visualization 1: 
 with col1:
-    with col5:
     if 'alo' in data.columns:
         st.write("### 'Pie Chart of allocation")
         fig, ax = plt.subplots()
@@ -76,6 +75,7 @@ with col4:
         st.write("Numeric columns not found in the dataset.")
 # Visualization 6: Pie Chart of 'alo' Distribution
 col5, col6 = st.columns(2)
+    with col5:
   if 'alo' in data.columns:
         st.write("### Distribution of Allocation")
         alo_counts = data['alo'].value_counts()
