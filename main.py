@@ -25,68 +25,67 @@ st.write(data.head())
 # Arrange visualizations in a 3-column layout
 col1, col2= st.columns(2)
 
-# Visualization 1: 
 with col1:
     if 'alo' in data.columns:
-        st.write("### 'Pie Chart of allocation")
+        st.write("### Pie Chart of Allocation")
         fig, ax = plt.subplots()
         data['alo'].value_counts().plot.pie(autopct='%1.1f%%', startangle=90, ax=ax)
         ax.set_ylabel('')
         st.pyplot(fig)
     else:
         st.write("Column 'alo' not found in the dataset.")
-  
 
-# Visualization 2: 
+# Visualization 2
 with col2:
     if 'agegrp' in data.columns:
         st.write("### Age Distribution")
         fig, ax = plt.subplots()
         sns.histplot(data['agegrp'], kde=True, bins=20, ax=ax)
-        ax.set_xlabel('agegrp')
+        ax.set_xlabel('Age Group')
         ax.set_ylabel('Frequency')
         st.pyplot(fig)
     else:
-        st.write("age not found in the dataset.")
+        st.write("Column 'agegrp' not found in the dataset.")
+
 col3, col4 = st.columns(2)
-# Visualization 3: Boxplot 
+
+# Visualization 3: Boxplot
 with col3:
     if 'alo' in data.columns and 'bmi2' in data.columns:
-        st.write("### Boxplot of BMI by allocation Category")
+        st.write("### Boxplot of BMI by Allocation Category")
         fig, ax = plt.subplots()
         sns.boxplot(x='alo', y='bmi2', data=data, ax=ax)
-        ax.set_xlabel('alo')
-        ax.set_ylabel('bmi2')
+        ax.set_xlabel('Allocation Category')
+        ax.set_ylabel('BMI')
         st.pyplot(fig)
     else:
-        st.write("Required columns not found in the dataset.")
+        st.write("Required columns ('alo' and 'bmi2') not found in the dataset.")
 
-# Visualization 4: Scatter Plot 
-
+# Visualization 4: Scatter Plot
 with col4:
     if 'height' in data.columns and 'weight' in data.columns:
-        st.write("### Scatter Plot of height and weight")
+        st.write("### Scatter Plot of Height and Weight")
         fig, ax = plt.subplots()
         sns.scatterplot(x='height', y='weight', data=data, ax=ax)
-        ax.set_xlabel('height')
-        ax.set_ylabel('weight')
+        ax.set_xlabel('Height')
+        ax.set_ylabel('Weight')
         st.pyplot(fig)
     else:
-        st.write("Numeric columns not found in the dataset.")
-# Visualization 6: Pie Chart of 'alo' Distribution
+        st.write("Columns 'height' and 'weight' not found in the dataset.")
+
+# Visualization 5: Distribution of 'alo' Categories (Bar Plot)
 col5, col6 = st.columns(2)
 with col5:
-  if 'alo' in data.columns:
-        st.write("### Distribution of Allocation")
+    if 'alo' in data.columns:
+        st.write("### Distribution of Allocation Categories")
         alo_counts = data['alo'].value_counts()
         fig, ax = plt.subplots()
         sns.barplot(x=alo_counts.index, y=alo_counts.values, ax=ax)
-        ax.set_xlabel('alo Categories')
+        ax.set_xlabel('Allocation Categories')
         ax.set_ylabel('Count')
         st.pyplot(fig)
     else:
-        st.write("Allocation not found in the dataset.")
-
+        st.write("Column 'alo' not found in the dataset.")
 # Add code display and cache-clearing function
 def clear_mito_backend_cache():
     _get_mito_backend.clear()
