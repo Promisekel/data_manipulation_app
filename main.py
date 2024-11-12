@@ -98,9 +98,10 @@ robjects.r('''
         adorn_percentages("all") %>%
         adorn_pct_formatting(digits = 2) %>%
         adorn_ns()
+        as.data.frame(rst_crp)
 ''')
 
-as.data.frame(rst_crp)
+
 # Add code display and cache-clearing function
 def clear_mito_backend_cache():
     _get_mito_backend.clear()
